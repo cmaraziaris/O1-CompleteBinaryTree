@@ -14,5 +14,5 @@ $(PROGRAM): clean $(OBJS)
 clean:
 	rm -f $(PROGRAM) $(OBJS)
 
-run: $(PROGRAM)
-	./$(PROGRAM)
+run: $(PROGRAM)						# Default argument : 22
+	./$(PROGRAM) 22

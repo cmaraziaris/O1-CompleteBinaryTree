@@ -6,20 +6,25 @@
 #define MINNUM 1e5
 #define MAXNUM 1e7
 
-int main(void)
+int main(int argc , char* argv[])
 {
+	if(argv[1] == NULL) {
+		printf("Usage : ./O1_cbt <size_of_tree>\n");
+		exit(EXIT_FAILURE);
+	}
+	unsigned int size = atoi(argv[1]);
 	clock_t t; 
     
 	CBTTree CBT = BTCreate();	/*	Create a tree  */
 
-	for (unsigned int i = 0; i < 20 ; i++)
+	for (unsigned int i = 0; i < size ; i++)
 		CBTInsertLast(CBT , rand()%50);
 
-	printf("Inserted 20 elements in the tree.\n");
+	printf("Inserted %u elements in the tree.\n",size);
 	printf("Printing tree . .\n\n");
 	BTreePrint(CBT,CBT->tree,1);
 
-	for (int i = 0 ; i < 20 ; i++)	
+	for (int i = 0 ; i < size ; i++)	
 		CBTRemove(CBT , CBTGetLast(CBT));
 	printf("CBTree Destroyed.\n\n");
 
@@ -46,5 +51,5 @@ int main(void)
 	printf ("Took : %.3lf seconds to delete them.\n\n",((double) t) / CLOCKS_PER_SEC);
 
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }
