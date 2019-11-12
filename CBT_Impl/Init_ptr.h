@@ -1,4 +1,4 @@
-/* Current version works only for integers */
+/* Current version works only for integers (as BTItems) */
 
 #pragma once
 

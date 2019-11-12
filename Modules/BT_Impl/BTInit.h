@@ -2,7 +2,10 @@
 
 #include "Init_ptr.h"
 
+/*===================================||	S T R U C T S ||===================================*/
+
 typedef struct tnode *BTNode;
+
 typedef struct tnode 
 {
 	BTItem item;
@@ -18,7 +21,10 @@ typedef struct main_tree
 	BTNode last;
 	BTNode tree;
 }maintree;
+
 typedef struct main_tree* BTTree;
+
+/*===================================||	F U N C T I O N S ||===================================*/
 
 unsigned short BTIsNil(BTNode);
 BTTree BTCreate (void);

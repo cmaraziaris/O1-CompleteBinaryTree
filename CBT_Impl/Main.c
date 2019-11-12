@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "CBTInit.h"
 #include <time.h>
+#include "CBTInit.h"
 
 int main(int argc , char* argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc , char* argv[])
 
 	clock_t t; 
     
-	const CBTTree CBT = BTCreate();	/*	Create a tree  */
+	const CBTTree CBT = BTCreate();							/*	Create a tree  */
 
 	for (unsigned int i = 0; i < size ; i++)
 		CBTInsertLast(CBT , rand()%50);
@@ -34,7 +34,7 @@ int main(int argc , char* argv[])
 	 
     t = clock();
 
-	for (unsigned int i = 0 ; i < j ; i++) 	/*	Insert elements	 */
+	for (unsigned int i = 0 ; i < j ; i++) 					/*	Insert elements	 */
 		CBTInsertLast(CBT , rand()%10000);
 
 	t = clock() - t;
@@ -43,7 +43,7 @@ int main(int argc , char* argv[])
 
 	t = clock();
  	
-	 for (unsigned int i = 0 ; i < j ; i++)	/*	Delete them  */
+	 for (unsigned int i = 0 ; i < j ; i++)					/*	Delete them  */
 		CBTRemove(CBT , CBTGetLast(CBT));
 	
 	t = clock() - t;
