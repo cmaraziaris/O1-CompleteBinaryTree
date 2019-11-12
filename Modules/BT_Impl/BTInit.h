@@ -16,7 +16,6 @@ typedef struct tnode
 typedef struct main_tree
 {
 	int size;
-	//int height;
 	BTNode last;
 	BTNode tree;
 }maintree;
