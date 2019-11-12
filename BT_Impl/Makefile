@@ -1,8 +1,8 @@
 MODULES= ../Modules
 
-CFLAGS= -g -Wall -I. 
+CFLAGS= -O3 -Wall -I. 
 
-PROGRAM= ex1-3
+PROGRAM= bt_impl
 
 OBJS= Main.o
 

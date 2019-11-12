@@ -49,11 +49,11 @@ inline BTNode BTGetChildRight(BTTree head, BTNode node) /* If the tree or the gi
 		//else  return NULL;		
 	}
 }
-inline BTItem BTGetItem(BTNode head,BTNode node)
-{
-	if (node) return node->item;					/* If the item exists, return it */
-	else  return -1;
-}
+// inline BTItem BTGetItem(BTNode head,BTNode node)
+// {
+// 	if (node) return node->item;					/* If the item exists, return it */
+// 	else  return -1;
+// }
 void BTInsertRoot(BTTree head, BTItem item)
 {
 	if (BTIsNil(BTGetRoot(head)))
@@ -134,13 +134,13 @@ void BTRemoveLeaf(BTTree head,BTNode node)
 	head->size--;
 	return;
 }
-inline void BTChange(BTNode node, BTItem item)
-{
-	if (node) {
-	node->item=item; /* Change the current node's item, with the given one */
-	return;
-	}
-}
+// inline void BTChange(BTNode node, BTItem item)
+// {
+// 	if (node) {
+// 	node->item=item; /* Change the current node's item, with the given one */
+// 	return;
+// 	}
+// }
 // static void PrintFormat (BTNode head)
 // {   		/* If the item is a number, use %d */	
 // 	if (BTGetItem(head,head)>=0 && BTGetItem(head,head)<ULONG_MAX)

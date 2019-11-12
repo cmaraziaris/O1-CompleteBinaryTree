@@ -3,13 +3,13 @@
 #include "CBTInit.h"
 #include <time.h>
 
-#define MINNUM 1e6
+#define MINNUM 1e5
 #define MAXNUM 1e7
 
 int main(void)
 {
 	clock_t t; 
-     
+    
 	CBTTree CBT = BTCreate();	/*	Create a tree  */
 
  for (int j=MINNUM ; j<=MAXNUM ; j*=10) {
@@ -21,7 +21,7 @@ int main(void)
 
 	t = clock() - t;
 
-	printf ("Took : %.3lf seconds to add %d elements.\n\n",((double) t) / CLOCKS_PER_SEC,j);
+	printf ("Took : %.3lf seconds to add %d elements.\n\n",((double) t) / CLOCKS_PER_SEC , BTSize(CBT));
 	
 	t = clock();
  	
@@ -30,7 +30,7 @@ int main(void)
 	
 	t = clock() - t;
 	
-	printf ("Took : %.3lf seconds to delete %d elements.\n\n",((double) t) / CLOCKS_PER_SEC,j);
+	printf ("Took : %.3lf seconds to delete them.\n\n",((double) t) / CLOCKS_PER_SEC);
 
 	}
 	return 0;
