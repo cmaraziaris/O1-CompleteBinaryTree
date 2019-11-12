@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <limits.h>
+//#include <ctype.h>
+//#include <limits.h>
 #include <assert.h>
 #include "BTInit.h"
 
-int BTIsNil (BTNode p) { return (p == NULL); } 	/* If node p is NULL , return 1 , else return 0 */
+inline int BTIsNil (BTNode p) { return (p == NULL); } 	/* If node p is NULL , return 1 , else return 0 */
 
 BTTree BTCreate (void) {
 	BTTree bTree;  								/* Create a main tree block */
@@ -18,7 +18,7 @@ BTTree BTCreate (void) {
 return bTree;
 }
 
-int BTSize (BTTree p) { return p->size; }
+inline int BTSize (BTTree p) { return p->size; }
 
 inline BTNode BTGetRoot(BTTree p) { return p->tree; } /* Return the node */
 
@@ -36,11 +36,11 @@ inline BTNode BTGetChildRight(BTTree head, BTNode node) { 	/* If the tree or the
 		return NULL;
 	else return node->right;								/* If the right child exists, return it */
 }
-// inline BTItem BTGetItem(BTNode head,BTNode node)
-// {
-// 	if (node) return node->item;					/* If the item exists, return it */
-// 	else  return -1;
-// }
+inline BTItem BTGetItem(BTNode node)
+{
+	if (!BTIsNil(node)) return node->item;					/* If the item exists, return it */
+	else return -1;
+}
 void BTInsertRoot(BTTree head, BTItem item)
 {
 	if (BTIsNil(BTGetRoot(head)))
@@ -116,7 +116,19 @@ void BTRemoveLeaf(BTTree head,BTNode node)
 		head->tree = NULL;
 	}
 	head->size--;
-	return;
+}
+void BTreePrint(BTTree tree,BTNode node, int indent)         /* Pretty print tree */
+{ 
+	if ((!tree) || (BTIsNil(node))) return;
+  	if (!BTIsNil(BTGetRoot(tree))) {                         /* If tree is not empty */
+    BTreePrint(tree,BTGetChildRight(tree,node), indent+4);
+                /* Print right subtree 4 places right of root node */
+    for (int i=0 ; i < indent ; i++)
+      printf(" ");                    /* Take care for indentation */
+    printf("%d\n", BTGetItem(node));                    /* Print root node */
+    BTreePrint(tree,BTGetChildLeft(tree,node), indent+4);
+                 /* Print left subtree 4 places right of root node */
+  }
 }
 // inline void BTChange(BTNode node, BTItem item)
 // {

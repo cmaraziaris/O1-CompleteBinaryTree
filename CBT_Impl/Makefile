@@ -1,6 +1,6 @@
 MODULES= ../Modules
 
-CFLAGS= -O3 -Wall -I . 
+CFLAGS= -O3 -g3 -Wall -I . 
 
 PROGRAM= O1_cbt
 

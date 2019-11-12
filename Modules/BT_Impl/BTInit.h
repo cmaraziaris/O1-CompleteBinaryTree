@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Init_ptr.h"
 
 typedef struct tnode *BTNode;
@@ -21,6 +22,7 @@ typedef struct main_tree
 }maintree;
 typedef struct main_tree* BTTree;
 
+int BTIsNil(BTNode);
 BTTree BTCreate (void);
 int BTHeight(BTTree);
 int BTSize(BTTree);
@@ -29,7 +31,7 @@ BTNode BTGetRoot(BTTree);
 BTNode BTGetParent(BTTree,BTNode);
 BTNode BTGetChildLeft(BTTree, BTNode);
 BTNode BTGetChildRight(BTTree, BTNode);
-int BTGetItem(BTNode,BTNode);
+int BTGetItem(BTNode);
 void BTInsertRoot(BTTree, BTItem);
 void BTInsertLeft(BTTree,BTNode,BTItem);
 void BTInsertRight(BTTree,BTNode,BTItem);
@@ -40,3 +42,4 @@ void BTInOrder(BTTree,void (*visit) (BTNode));
 void BTPostOrder(BTTree,void (*visit) (BTNode));
 void BTLevelOrder(BTTree,void (*visit) (BTNode));
 void BTDestroy (BTTree);
+void BTreePrint(BTTree tree,BTNode node, int indent);
