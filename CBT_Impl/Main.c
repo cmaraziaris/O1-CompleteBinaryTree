@@ -3,16 +3,16 @@
 #include "CBTInit.h"
 #include <time.h>
 
-#define MINNUM 1e5
-#define MAXNUM 1e7
-
 int main(int argc , char* argv[])
 {
-	if(argv[1] == NULL) {
-		printf("Usage : ./O1_cbt <size_of_tree>\n");
+	if(argc != 4) {
+		printf("Usage : ./O1_cbt  <size_of_tree>  <minimum_num_of_elements>  <maximum_num_of_elements> \n");
 		exit(EXIT_FAILURE);
 	}
 	unsigned int size = atoi(argv[1]);
+	#define MINNUM atoi(argv[2])
+	#define MAXNUM atoi(argv[3])
+
 	clock_t t; 
     
 	CBTTree CBT = BTCreate();	/*	Create a tree  */
@@ -51,5 +51,8 @@ int main(int argc , char* argv[])
 	printf ("Took : %.3lf seconds to delete them.\n\n",((double) t) / CLOCKS_PER_SEC);
 
 	}
+
+	free(CBT);		
+
 	return EXIT_SUCCESS;
 }

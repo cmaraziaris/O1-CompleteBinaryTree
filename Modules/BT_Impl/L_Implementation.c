@@ -123,7 +123,7 @@ void BTreePrint(BTTree tree,BTNode node, int indent)         /* Pretty print tre
   	if (!BTIsNil(BTGetRoot(tree))) {                         /* If tree is not empty */
     BTreePrint(tree,BTGetChildRight(tree,node), indent+4);
                 /* Print right subtree 4 places right of root node */
-    for (int i=0 ; i < indent ; i++)
+    for (unsigned int i=0 ; i < indent ; i++)
       printf(" ");                    /* Take care for indentation */
     printf("%d\n", BTGetItem(node));                    /* Print root node */
     BTreePrint(tree,BTGetChildLeft(tree,node), indent+4);

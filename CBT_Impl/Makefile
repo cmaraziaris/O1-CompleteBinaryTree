@@ -15,4 +15,4 @@ clean:
 	rm -f $(PROGRAM) $(OBJS)
 
 run: $(PROGRAM)						# Default argument : 22
-	./$(PROGRAM) 22
+	./$(PROGRAM) 22 100000 10000000
