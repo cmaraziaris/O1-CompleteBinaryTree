@@ -5,7 +5,6 @@
 typedef struct tnode *BTNode;
 typedef struct tnode 
 {
-	int priority;
 	BTItem item;
 	BTNode left;
 	BTNode right;
@@ -21,11 +20,10 @@ typedef struct main_tree
 }maintree;
 typedef struct main_tree* BTTree;
 
-int BTIsNil(BTNode);
+unsigned short BTIsNil(BTNode);
 BTTree BTCreate (void);
-int BTHeight(BTTree);
-int BTSize(BTTree);
-int BTIsEmpty(BTNode);
+//int BTHeight(BTTree);
+unsigned int BTSize(BTTree);
 BTNode BTGetRoot(BTTree);
 BTNode BTGetParent(BTTree,BTNode);
 BTNode BTGetChildLeft(BTTree, BTNode);
@@ -35,10 +33,10 @@ void BTInsertRoot(BTTree, BTItem);
 void BTInsertLeft(BTTree,BTNode,BTItem);
 void BTInsertRight(BTTree,BTNode,BTItem);
 void BTRemoveLeaf(BTTree,BTNode);
-void BTChange(BTNode, BTItem);
-void BTPreOrder(BTTree,void (*visit) (BTNode));
-void BTInOrder(BTTree,void (*visit) (BTNode));
-void BTPostOrder(BTTree,void (*visit) (BTNode));
-void BTLevelOrder(BTTree,void (*visit) (BTNode));
-void BTDestroy (BTTree);
+//void BTChange(BTNode, BTItem);
+//void BTPreOrder(BTTree,void (*visit) (BTNode));
+//void BTInOrder(BTTree,void (*visit) (BTNode));
+//void BTPostOrder(BTTree,void (*visit) (BTNode));
+//void BTLevelOrder(BTTree,void (*visit) (BTNode));
+//void BTDestroy (BTTree);
 void BTreePrint(BTTree tree,BTNode node, int indent);

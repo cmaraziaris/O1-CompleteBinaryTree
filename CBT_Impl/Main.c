@@ -9,32 +9,32 @@ int main(int argc , char* argv[])
 		printf("Usage : ./O1_cbt  <size_of_tree>  <minimum_num_of_elements>  <maximum_num_of_elements> \n");
 		exit(EXIT_FAILURE);
 	}
-	unsigned int size = atoi(argv[1]);
+	const unsigned int size = atoi(argv[1]);
 	#define MINNUM atoi(argv[2])
 	#define MAXNUM atoi(argv[3])
 
 	clock_t t; 
     
-	CBTTree CBT = BTCreate();	/*	Create a tree  */
+	const CBTTree CBT = BTCreate();	/*	Create a tree  */
 
 	for (unsigned int i = 0; i < size ; i++)
 		CBTInsertLast(CBT , rand()%50);
 
 	printf("Inserted %u elements in the tree.\n",size);
 	printf("Printing tree . .\n\n");
-	BTreePrint(CBT,CBT->tree,1);
+	BTreePrint(CBT,CBT->tree,2);
 
-	for (int i = 0 ; i < size ; i++)	
+	for (unsigned int i = 0 ; i < size ; i++)	
 		CBTRemove(CBT , CBTGetLast(CBT));
 	printf("CBTree Destroyed.\n\n");
 
 	printf("Let's add some more elemets . . .\n\n\n");
 
- for (int j=MINNUM ; j<=MAXNUM ; j*=10) {
+ for (unsigned int j=MINNUM ; j<=MAXNUM ; j*=10) {
 	 
     t = clock();
 
-	for (int i = 0 ; i < j ; i++) 	/*	Insert elements	 */
+	for (unsigned int i = 0 ; i < j ; i++) 	/*	Insert elements	 */
 		CBTInsertLast(CBT , rand()%10000);
 
 	t = clock() - t;
@@ -43,7 +43,7 @@ int main(int argc , char* argv[])
 
 	t = clock();
  	
-	 for (int i = 0 ; i < j ; i++)	/*	Delete them  */
+	 for (unsigned int i = 0 ; i < j ; i++)	/*	Delete them  */
 		CBTRemove(CBT , CBTGetLast(CBT));
 	
 	t = clock() - t;

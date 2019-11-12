@@ -5,7 +5,7 @@
 #include <assert.h>
 #include "BTInit.h"
 
-inline int BTIsNil (BTNode p) { return (p == NULL); } 	/* If node p is NULL , return 1 , else return 0 */
+inline unsigned short BTIsNil (BTNode p) { return (p == NULL); } 	/* If node p is NULL , return 1 , else return 0 */
 
 BTTree BTCreate (void) {
 	BTTree bTree;  								/* Create a main tree block */
@@ -18,7 +18,7 @@ BTTree BTCreate (void) {
 return bTree;
 }
 
-inline int BTSize (BTTree p) { return p->size; }
+inline unsigned int BTSize (BTTree p) { return p->size; }
 
 inline BTNode BTGetRoot(BTTree p) { return p->tree; } /* Return the node */
 
