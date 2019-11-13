@@ -6,8 +6,12 @@ typedef BTNode CBTNode;
 
 typedef BTTree CBTTree;
 
-void CBTInsertLast(CBTTree,CBTItem);
+/*=======================================|| F U N C T I O N S ||=======================================*/
 
-CBTNode CBTGetLast(CBTTree);
+CBTNode CBTGetLast ( CBTTree );
 
-void CBTRemove (CBTTree,CBTNode);
+void CBTRemove ( CBTTree , CBTNode );
+
+void CBTInsertLast ( CBTTree , CBTItem );
+
+/*=======================================|| E N D  O F  F I L E ||=======================================*/

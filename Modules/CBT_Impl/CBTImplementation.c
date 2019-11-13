@@ -1,8 +1,5 @@
-// TODO : Finish README
-
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
 #include "CBTInit.h"
 #include "BTInit.h"
 
@@ -32,9 +29,10 @@ void CBTInsertLast(CBTTree tree,BTItem item) {
     else RecInsert( tree , BTGetParent(tree,CBTGetLast(tree)) , CBTGetLast(tree),item );   
 }  
 
-CBTNode CBTGetLast(CBTTree head) { return head->last; }
+CBTNode CBTGetLast (CBTTree head) { return head->last; }
 
 void CBTRemove(CBTTree head,CBTNode node) {
-	head->last=node->back;
+	head->last=node->back;                                                          /* Update the last tree node */
     BTRemoveLeaf(head,node);
 }
+/*=======================================|| E N D  O F  F I L E ||=======================================*/

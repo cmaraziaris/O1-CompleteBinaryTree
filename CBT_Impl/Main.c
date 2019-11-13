@@ -5,7 +5,7 @@
 
 int main(int argc , char* argv[])
 {
-	if(argc != 4) {
+	if(argc != 4) {			
 		printf("Usage : ./O1_cbt  <size_of_tree>  <minimum_num_of_elements>  <maximum_num_of_elements> \n");
 		exit(EXIT_FAILURE);
 	}
@@ -22,7 +22,7 @@ int main(int argc , char* argv[])
 
 	printf("Inserted %u elements in the tree.\n",size);
 	printf("Printing tree . .\n\n");
-	BTreePrint(CBT,CBT->tree,2);
+	BTreePrint(CBT,BTGetRoot(CBT),2);
 
 	for (unsigned int i = 0 ; i < size ; i++)	
 		CBTRemove(CBT , CBTGetLast(CBT));
@@ -35,7 +35,7 @@ int main(int argc , char* argv[])
     t = clock();
 
 	for (unsigned int i = 0 ; i < j ; i++) 					/*	Insert elements	 */
-		CBTInsertLast(CBT , rand()%10000);
+		CBTInsertLast(CBT , rand()%1000000);
 
 	t = clock() - t;
 

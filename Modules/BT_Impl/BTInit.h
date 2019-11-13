@@ -4,20 +4,20 @@
 
 /*===================================||	S T R U C T S ||===================================*/
 
-typedef struct tnode *BTNode;
+typedef struct tnode *BTNode;	/* Our nodes are called BTNodes */
 
 typedef struct tnode 
 {
 	BTItem item;
-	BTNode left;
-	BTNode right;
-	BTNode back;
-	BTNode parent;
+	BTNode left;				/* Left child */
+	BTNode right;				/* Right child */
+	BTNode back;				/* Brother */
+	BTNode parent;				/* Parent of node */
 } BTNodes;
 
 typedef struct main_tree
 {
-	int size;
+	int size;					/* Number of treenodes */
 	BTNode last;
 	BTNode tree;
 }maintree;
@@ -26,23 +26,30 @@ typedef struct main_tree* BTTree;
 
 /*===================================||	F U N C T I O N S ||===================================*/
 
-unsigned short BTIsNil(BTNode);
-BTTree BTCreate (void);
-//int BTHeight(BTTree);
-unsigned int BTSize(BTTree);
-BTNode BTGetRoot(BTTree);
-BTNode BTGetParent(BTTree,BTNode);
-BTNode BTGetChildLeft(BTTree, BTNode);
-BTNode BTGetChildRight(BTTree, BTNode);
-int BTGetItem(BTNode);
-void BTInsertRoot(BTTree, BTItem);
-void BTInsertLeft(BTTree,BTNode,BTItem);
-void BTInsertRight(BTTree,BTNode,BTItem);
-void BTRemoveLeaf(BTTree,BTNode);
-//void BTChange(BTNode, BTItem);
-//void BTPreOrder(BTTree,void (*visit) (BTNode));
-//void BTInOrder(BTTree,void (*visit) (BTNode));
-//void BTPostOrder(BTTree,void (*visit) (BTNode));
-//void BTLevelOrder(BTTree,void (*visit) (BTNode));
-//void BTDestroy (BTTree);
-void BTreePrint(BTTree tree,BTNode node, int indent);
+BTTree BTCreate ( void );
+
+BTItem BTGetItem ( BTNode );
+
+BTNode BTGetRoot ( BTTree );
+
+unsigned int BTSize ( BTTree );
+
+unsigned short BTIsNil ( BTNode );
+
+void BTRemoveLeaf ( BTTree , BTNode );
+
+void BTInsertRoot ( BTTree , BTItem );
+
+BTNode BTGetParent ( BTTree , BTNode );
+
+BTNode BTGetChildLeft ( BTTree , BTNode );
+
+void BTreePrint ( BTTree , BTNode , int );
+
+BTNode BTGetChildRight ( BTTree , BTNode );
+
+void BTInsertLeft ( BTTree , BTNode , BTItem );
+
+void BTInsertRight ( BTTree , BTNode , BTItem );
+
+/*=======================================|| E N D  O F  F I L E ||=======================================*/
