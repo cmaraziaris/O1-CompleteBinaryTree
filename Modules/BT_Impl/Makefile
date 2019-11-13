@@ -2,4 +2,4 @@
 
 CFLAGS+= -I$(MODULES)/BT_Impl
  
-OBJS += $(MODULES)/BT_Impl/ΒΤImplementation.o
+OBJS += $(MODULES)/BT_Impl/BTImplementation.o
