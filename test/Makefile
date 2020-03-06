@@ -1,6 +1,6 @@
 # Makefile of CBT Implementation
 
-MODULES= ../Modules
+MODULES= ../src
 
 CFLAGS= -O3 -Wall -I . 
 
@@ -8,7 +8,7 @@ PROGRAM= O1_cbt
 
 OBJS= Main.o
 
-include $(MODULES)/CBT_Impl/Makefile
+include $(MODULES)/CBT_Impl/make.inc
 
 $(PROGRAM): clean $(OBJS)
 	gcc $(OBJS) -o $(PROGRAM) 
