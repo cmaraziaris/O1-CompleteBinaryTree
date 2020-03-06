@@ -3,7 +3,7 @@
 #include "CBTInit.h"
 #include "BTInit.h"
 
-static void InsertFarLeft (CBTTree tree,CBTNode node ,CBTItem item) {
+static void InsertFarLeft (CBTree tree ,CBTNode node ,CBTItem item) {
     
     if (BTIsNil(BTGetChildLeft(tree,node))){ 	                                    /* We've found the far left node */
 	    BTInsertLeft (tree,node,item); 
@@ -12,7 +12,7 @@ static void InsertFarLeft (CBTTree tree,CBTNode node ,CBTItem item) {
     InsertFarLeft(tree,BTGetChildLeft(tree,node),item);                              /* Continue to the left */
 }
 
-static void RecInsert (CBTTree tree,CBTNode parent,CBTNode last,CBTItem item) {
+static void RecInsert (CBTree tree ,CBTNode parent ,CBTNode last ,CBTItem item) {
     
     if (BTIsNil(parent)) InsertFarLeft(tree,BTGetRoot(tree),item);                  /* If the tree is full, insert the node far left */
     else if (BTGetChildRight(tree,parent) == last)		                            /* If the last node is a right child */
@@ -23,16 +23,16 @@ static void RecInsert (CBTTree tree,CBTNode parent,CBTNode last,CBTItem item) {
     } 
 }
 
-void CBTInsertLast(CBTTree tree,BTItem item) {
+void CBTInsertLast(CBTree tree ,BTItem item) {
 
     if (BTIsNil(BTGetRoot(tree))) BTInsertRoot(tree,item);		                    /* If we have 0 nodes , we insert the item instantly */
     else RecInsert( tree , BTGetParent(tree,CBTGetLast(tree)) , CBTGetLast(tree),item );   
 }  
 
-CBTNode CBTGetLast (CBTTree head) { return head->last; }
+CBTNode CBTGetLast (CBTree head) { return head->last; }
 
-void CBTRemove(CBTTree head,CBTNode node) {
+void CBTRemove(CBTree head,CBTNode node) {
 	head->last=node->back;                                                          /* Update the last tree node */
-    BTRemoveLeaf(head,node);
+    BTRemoveLeaf(head , node);
 }
 /*=======================================|| E N D  O F  F I L E ||=======================================*/

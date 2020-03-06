@@ -4,14 +4,14 @@
 
 typedef BTNode CBTNode;
 
-typedef BTTree CBTTree;
+typedef BTree CBTree;
 
 /*=======================================|| F U N C T I O N S ||=======================================*/
 
-CBTNode CBTGetLast ( CBTTree );
+CBTNode CBTGetLast ( CBTree );
 
-void CBTRemove ( CBTTree , CBTNode );
+void CBTRemove ( CBTree , CBTNode );
 
-void CBTInsertLast ( CBTTree , CBTItem );
+void CBTInsertLast ( CBTree , CBTItem );
 
 /*=======================================|| E N D  O F  F I L E ||=======================================*/

@@ -3,50 +3,61 @@
 #include <assert.h>
 #include "BTInit.h"
 
-unsigned short BTIsNil (BTNode p) { return (p == NULL); }
+bool BTIsNil (BTNode p) { return p == NULL; }
 
-BTTree BTCreate (void) {
-	BTTree bTree;  											/* Create a main tree block */
-	bTree = malloc (sizeof(struct main_tree));
-	bTree->tree = NULL;
-	bTree->last = NULL;
-	bTree->size = 0;
+BTree BTCreate (DestroyFunc destroyVal , PrintFunc printVal) {
+	BTree newTree;  											/* Create a main tree block */
+	assert ((newTree = malloc (sizeof(struct main_tree))));
+	newTree->tree = NULL;
+	newTree->last = NULL;
+	newTree->size = 0;
+	newTree->destroyValue = destroyVal;
+	newTree->printValue = printVal;
 	printf("Tree created successfully!\n\n");
 
-return bTree;
+return newTree;
 }
 
-unsigned int BTSize (BTTree p) { return p->size; }
-
-BTNode BTGetRoot(BTTree p) { return p->tree; } 				/* Return the root */
-
-BTNode BTGetParent(BTTree head ,BTNode node) {
-	if ( (BTIsNil(BTGetRoot(head)) ) || ( BTIsNil(node) )) 
-		return NULL;
-	else return node->parent;  								/* If node's parent exists return it */										
+static void BTsetNode (BTNode node ,BTItem item, BTNode left, BTNode right, BTNode parent, BTNode back) {
+	/* Set given node's interior */
+	assert(node);
+	node->item = item;
+	node->left = left;
+	node->right = right;
+	node->parent = parent;
+	node->back = back;
 }
 
-BTNode BTGetChildLeft(BTTree head, BTNode node) {
-	if ( (BTIsNil(BTGetRoot(head)) ) || ( BTIsNil(node) )) 	/* If the tree or the given node is NULL, return NULL */
-		return NULL;
-	else return node->left;									/* If the left child exists, return it */
+uint32_t BTSize (BTree p) { return p->size; }
+
+BTNode BTGetRoot(BTree p) { return p->tree; } 				/* Return the root */
+
+BTNode BTGetParent(BTree head ,BTNode node) {
+	/* If node's parent exists return it */
+	return ( (BTIsNil(BTGetRoot(head)) ) || ( BTIsNil(node) )) ? NULL : node->parent;	
 }
 
-BTNode BTGetChildRight(BTTree head, BTNode node) { 			
-	if ((BTIsNil(BTGetRoot(head)))||(BTIsNil(node)))		/* If the tree or the given node is NULL, return NULL */ 
-		return NULL;
-	else return node->right;								/* If the right child exists, return it */
+BTNode BTGetChildLeft(BTree head, BTNode node) {
+	/* If the tree or the given node is NULL, return NULL */
+	/* If the left child exists, return it */
+	return ( (BTIsNil(BTGetRoot(head)) ) || ( BTIsNil(node) )) ? NULL : node->left;
+}
+
+BTNode BTGetChildRight(BTree head, BTNode node) { 			
+	/* If the tree or the given node is NULL, return NULL */
+	/* If the right child exists, return it */ 
+	return ( (BTIsNil(BTGetRoot(head)) ) || ( BTIsNil(node) )) ? NULL : node->right;
 }
 
 BTItem BTGetItem(BTNode node) { return node->item; }		
 
-void BTInsertRoot(BTTree head, BTItem item)
-{
+void BTInsertRoot(BTree head, BTItem item) {
+	assert(head);
 	if (BTIsNil(BTGetRoot(head))) {							
 		assert((head->tree = malloc(sizeof(BTNodes ))));	/* Allocate memory for new node */
-		 
-		head->tree->item = item;  							/* Pass the item to the node */
-		head->tree->left = head->tree->right = head->tree->parent = head->tree->back = NULL;
+
+		BTsetNode(head->tree , item , NULL , NULL , NULL , NULL);
+
 		head->last = BTGetRoot(head);
 		head->size++;	
 		return;
@@ -54,87 +65,87 @@ void BTInsertRoot(BTTree head, BTItem item)
 	printf("Tree has already a root.\nRoot insertion failed.\n");
 }
 
-void BTInsertLeft(BTTree head,BTNode node,BTItem item)
-{
-	if (BTIsNil( BTGetRoot(head ))) 						/* If the tree doesn't exist, inform the user. */
-		printf("Your tree is empty.\n");
-	else {
-		if (!BTIsNil(node)) {
-			if (BTIsNil(BTGetChildLeft(head,node))) 		/* If the node's left child doesn't exist, create one */
-			{
-				assert((node->left = malloc(sizeof(BTNodes))));
-
-				node->left->back = head->last;
-				head->last = node->left;
-				node->left->item = item;
-				node->left->parent = node;
-				node->left->left = NULL;
-				node->left->right = NULL;
-				head->size++;
-			}	  											/* If the node has already a left child, inform the user. */
-			else printf("Node with item <%d> has already a left child.\n", BTGetItem(node)); 
-		}
-	}
-}
-
-void BTInsertRight(BTTree head,BTNode node,BTItem item)
-{
-	if (BTIsNil( BTGetRoot(head ))) 						/* If the tree doesn't exist, inform the user. */
-		printf("Your tree is empty.\n");
-	else {
-		if (!BTIsNil(node)) {
-			if (BTIsNil(BTGetChildRight(head,node)))  		/* If the node's right child doesn't exist, create one */
-			{
-				assert((node->right=malloc(sizeof(BTNodes))));
+void BTInsertLeft(BTree head, BTNode node, BTItem item) {
+	assert(head);
+	/* If the tree doesn't exist, inform the user. */
+	if (BTIsNil( BTGetRoot(head ))) 						
+		printf("Tree is empty.\n");
+	/* If the node's left child doesn't exist, create one */
+	else if (!BTIsNil(node) && BTIsNil(BTGetChildLeft(head,node))) {
 			
-				node->right->back = head->last;
-				head->last = node->right;
-				node->right->item = item;
-				node->right->parent = node;
-				node->right->left = NULL;
-				node->right->right = NULL;
-				head->size++;
-			}												/* If the node has already a right child, inform the user. */
-			else printf("Node with item <%d> has already a right child.\n", BTGetItem(node)); 
-		}
+		assert((node->left = malloc(sizeof(BTNodes))));
+			
+		BTsetNode(node->left , item , NULL , NULL , node , head->last);
+
+		head->last = node->left;
+		head->size++;
 	}
+	/* If the node has already a left child, inform the user. */
+	else printf("Attempt to insert a left child to a non-empty position.\n"); 
 }
 
-void BTRemoveLeaf(BTTree head,BTNode node)
-{
-	if (BTIsNil(BTGetRoot(head)))	return;					/* If the tree is empty, return */
+void BTInsertRight(BTree head, BTNode node, BTItem item) {
+	assert(head);
+	/* If the tree doesn't exist, inform the user. */
+	if (BTIsNil( BTGetRoot(head ))) 						
+		printf("Tree is empty.\n");
+	/* If the node's right child doesn't exist, create one */
+	else if (!BTIsNil(node) && BTIsNil(BTGetChildRight(head,node))) {
+		
+		assert((node->right=malloc(sizeof(BTNodes))));
+	
+		BTsetNode(node->right , item , NULL , NULL , node , head->last);
 
+		head->last = node->right;
+		head->size++;
+	}
+	/* If the node has already a right child, inform the user. */
+	else printf("Attempt to insert a right child to a non-empty position.\n"); 
+}
+
+void BTRemoveLeaf(BTree head , BTNode node ) {
+	/* If the tree is empty, return */
+	if (head == NULL || BTIsNil(BTGetRoot(head))) return;		
+
+	/* Check whether the given node is a leaf */
 	if (BTGetChildLeft(head,node) || BTGetChildRight(head,node)) {		
-		printf("Node with item <%d> is not a leaf.\nRemoval failed.\n" , BTGetItem(node));
-		return;												/* Check whether the given node is a leaf */
-	}										
-	BTNode temp=node;
-	if (!BTIsNil(BTGetParent(head,node))) {					
-		node=BTGetParent(head,node);
-		if (node->left == temp) {
-			free(temp);
-			node->left = NULL;
-		} else {
-			free(temp);
-			node->right = NULL;
-		}
+		printf("Used function <BTRemoveLeaf> to remove a non-leaf node.\nRemoval failed.\n");
+		return;												
+	}		
+
+	BTNode parent = BTGetParent(head,node);
+	if (!BTIsNil(parent)) {	
+
+		if (parent->left == node) 
+			parent->left = NULL; 
+		
+		else parent->right = NULL;
+
+		head->destroyValue(BTGetItem(node));
+		free(node);
 	} else {
+
+		head->destroyValue(BTGetItem(BTGetRoot(head)));
 		free(BTGetRoot(head));
 		head->tree = NULL;
 	}
 	head->size--;
 }
 
-void BTreePrint(BTTree tree,BTNode node, int indent)        /* Pretty print tree */
+/* Pretty print tree */
+void BTreePrint(BTree tree ,BTNode node ,int indent)        
 { 
-	if ((!tree) || (BTIsNil(node))) return;
-  	if (!BTIsNil(BTGetRoot(tree))) {                        /* If tree is not empty */
-    BTreePrint(tree,BTGetChildRight(tree,node), indent+4);
-                											/* Print right subtree 4 places right of root node */
+	if (tree == NULL || BTIsNil(node)) return ;
+	/* If tree is not empty */
+  	if (!BTIsNil(BTGetRoot(tree))) {                        
+	/* Print right subtree 4 places right of root node */
+    BTreePrint(tree ,BTGetChildRight(tree,node) ,indent + 4);
+                												
     for (unsigned int i = 0 ; i < indent ; i++)
-      printf(" ");                    						/* Take care for indentation */
-    printf("(%d)\n", BTGetItem(node));                    	/* Print root node */
-    BTreePrint(tree,BTGetChildLeft(tree,node), indent+4);	/* Print left subtree 4 places right of root node */
+      printf(" ");                    							/* Take care for indentation */
+	tree->printValue(BTGetItem(node));  								/* Print root node */
+	/* Print left subtree 4 places right of root node */
+	BTreePrint(tree ,BTGetChildLeft(tree,node) ,indent + 4);	
 	}
 }
 /*=======================================|| E N D  O F  F I L E ||=======================================*/

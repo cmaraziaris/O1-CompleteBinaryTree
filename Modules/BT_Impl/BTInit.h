@@ -5,6 +5,8 @@
 /*===================================||	S T R U C T S ||===================================*/
 
 typedef struct tnode *BTNode;	/* Our nodes are called BTNodes */
+typedef void (*DestroyFunc) (void *);
+typedef void (*PrintFunc) (void *);
 
 typedef struct tnode 
 {
@@ -17,39 +19,42 @@ typedef struct tnode
 
 typedef struct main_tree
 {
-	int size;					/* Number of treenodes */
+	uint32_t size;				/* Number of treenodes */
 	BTNode last;
 	BTNode tree;
-}maintree;
+	DestroyFunc destroyValue;
+	PrintFunc printValue;
 
-typedef struct main_tree* BTTree;
+} mainTree;
+
+typedef struct main_tree* BTree;
 
 /*===================================||	F U N C T I O N S ||===================================*/
 
-BTTree BTCreate ( void );
+BTree BTCreate ( DestroyFunc , PrintFunc );
 
 BTItem BTGetItem ( BTNode );
 
-BTNode BTGetRoot ( BTTree );
+BTNode BTGetRoot ( BTree );
 
-unsigned int BTSize ( BTTree );
+uint32_t BTSize ( BTree );
 
-unsigned short BTIsNil ( BTNode );
+bool BTIsNil ( BTNode );
 
-void BTRemoveLeaf ( BTTree , BTNode );
+void BTRemoveLeaf ( BTree , BTNode );
 
-void BTInsertRoot ( BTTree , BTItem );
+void BTInsertRoot ( BTree , BTItem );
 
-BTNode BTGetParent ( BTTree , BTNode );
+BTNode BTGetParent ( BTree , BTNode );
 
-BTNode BTGetChildLeft ( BTTree , BTNode );
+BTNode BTGetChildLeft ( BTree , BTNode );
 
-void BTreePrint ( BTTree , BTNode , int );
+void BTreePrint ( BTree , BTNode , int );
 
-BTNode BTGetChildRight ( BTTree , BTNode );
+BTNode BTGetChildRight ( BTree , BTNode );
 
-void BTInsertLeft ( BTTree , BTNode , BTItem );
+void BTInsertLeft ( BTree , BTNode , BTItem );
 
-void BTInsertRight ( BTTree , BTNode , BTItem );
+void BTInsertRight ( BTree , BTNode , BTItem );
 
 /*=======================================|| E N D  O F  F I L E ||=======================================*/
