@@ -10,13 +10,17 @@
 ```c
 $ cd ~/O1-CompleteBT/CBT_Impl
 ```
+#### Set Strings as tree items (Default):
+```c
+$ make run
+```
+or 
+```c
+$ make run ITEM_TYPE=str
+```
 #### Set Integers as tree items:
 ```c
 $ make run ITEM_TYPE=int
-```
-#### Set Strings as tree items:
-```c
-$ make run ITEM_TYPE=str
 ```
 ### Run with Custom Arguments
 
