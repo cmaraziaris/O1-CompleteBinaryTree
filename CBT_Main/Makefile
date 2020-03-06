@@ -18,3 +18,6 @@ clean:
 
 run: $(PROGRAM)						# Run with default arguments 
 	./$(PROGRAM) 22 100000 10000000
+
+check: $(PROGRAM)					# Check for memory leaks (Requires Valgrind Installation)
+	valgrind ./$(PROGRAM) 22 10000 1000000
