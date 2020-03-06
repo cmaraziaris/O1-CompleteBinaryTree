@@ -1,7 +1,8 @@
-/* Current version works only for integers (as BTItems) */
-
 #pragma once
 
-typedef int BTItem;         /* Our item will be an integer */
+#include <stdint.h>
+#include <stdbool.h>
+
+typedef void * BTItem;         /* Item can be anything ! */
 
 typedef BTItem CBTItem;
