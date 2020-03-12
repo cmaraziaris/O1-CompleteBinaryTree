@@ -2,6 +2,9 @@
 
 ### A Generic Complete Binary Tree implementation , with O(1) [Amortized Complexity](https://en.wikipedia.org/wiki/Amortized_analysis) in :
 > - #### Insertion
+
+### & O(1) Complexity in :
+
 > - #### Removal of last node
 > - #### Getting the last node
 
